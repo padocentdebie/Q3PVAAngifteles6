@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politie Training - Casus Beukenlaan 8</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Sidebar */
+        nav { width: 280px; background: #1e293b; border-right: 2px solid #334155; display: flex; flex-direction: column; padding: 20px; }
+        nav h2 { font-size: 1.1rem; color: #ffcc00; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+        .nav-item { padding: 12px 15px; margin-bottom: 8px; cursor: pointer; border-radius: 8px; transition: 0.2s; background: #0f172a; border: 1px solid transparent; font-size: 0.9rem; }
+        .nav-item:hover { background: #003082; }
+        .nav-item.active { background: #003082; border-color: #ffcc00; font-weight: bold; }
+
+        /* Content Area */
+        main { flex: 1; overflow-y: auto; position: relative; background: #f0f2f5; color: #1e293b; }
+        .screen { display: none; padding: 30px; min-height: 100%; box-sizing: border-box; }
+        .screen.active { display: block; }
+        
+        iframe { width: 100%; height: 80vh; border: none; border-radius: 12px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .instructie-blok { background: white; padding: 25px; border-radius: 12px; border-left: 6px solid #003082; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Zinsontleding Game Styles */
+        .game-container { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .sentence-box { font-size: 1.3rem; font-weight: bold; margin: 20px 0; color: #003082; min-height: 3rem; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn-opt { padding: 15px; border: 2px solid #003082; border-radius: 8px; background: white; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .btn-opt:hover { background: #e3f2fd; }
+        .leaderboard { margin-top: 30px; text-align: left; background: #f8f9fa; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>Casus: Beukenlaan 8</h2>
+    <div class="nav-item active" onclick="showScreen(1)">1. Inloggen</div>
+    <div class="nav-item" onclick="showScreen(2)">2. Interactieve Casus</div>
+    <div class="nav-item" onclick="showScreen(3)">3. Oefening Zinsbouw</div>
+    <div class="nav-item" onclick="showScreen(4)">4. Instructie & Ontleding</div>
+    <div class="nav-item" onclick="showScreen(5)">5. Juridisch Lexicon</div>
+</nav>
+
+<main>
+    <div id="screen1" class="screen active">
+        <div style="max-width: 450px; margin: 100px auto; background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+            <h2 style="color:#003082">NATOKLAS LOGIN</h2>
+            <select id="main_klas" style="width:100%; padding:15px; margin:10px 0; border-radius:8px; border:1px solid #ccc;">
+                <option value="">Selecteer klas...</option>
+                <option>Alpha</option><option>Bravo</option><option>Charlie</option>
+                <option>Delta</option><option>Echo</option><option>Foxtrot</option>
+                <option>Golf</option><option>Hotel</option><option>Juliet</option>
+                <option>Kilo</option><option>Lima</option><option>Mike</option>
+            </select>
+            <input type="text" id="main_naam" placeholder="Naam Agent" style="width:100%; padding:15px; margin:10px 0; border-radius:8px; border:1px solid #ccc;">
+            <button onclick="showScreen(2)" style="background:#003082; color:white; padding:15px; width:100%; border:none; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:10px;">START LES</button>
+        </div>
+    </div>
+
+    <div id="screen2" class="screen">
+        <iframe srcdoc='<!DOCTYPE html>
+        <html lang="nl">
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+                .oc-melding { background: #003082; color: white; padding: 20px; border-left: 10px solid #d32f2f; margin-bottom: 20px; }
+                .audio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+                .audio-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #003082; }
+                textarea { width: 100%; height: 150px; margin-top: 10px; }
+                .section-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+            </style>
+        </head>
+        <body>
+            <div class="oc-melding">
+                <strong>📡 MELDING OPERATIONEEL CENTRUM (14:00 UUR)</strong><br>
+                "Verzoek te gaan naar het adres Beukenlaan 8 te XX. Er zijn achtereenvolgens meerdere meldingen gedaan door de buurvrouw van het huis ernaast op huisnummer 10. Zij geeft aan dat bij de buren de hele dag muziek hard aanstaat en kinderen lawaai maken door hard door het huis te rennen en met deuren te slaan. RTIC geeft aan: familie De Groot (man, vrouw, twee kinderen) staat hier ingeschreven en is bekend bij de wijkagent."
+            </div>
+            <div class="audio-grid">
+                <div class="audio-card">
+                    <strong>Dhr. De Groot (Nr. 8)</strong>
+                    <p style="font-size:0.85em;">De man blijft erg vriendelijk en vindt het zichtbaar fijn dat hij bezoek heeft. Hij blijkt licht verstandelijk beperkt te zijn en krijgt begeleiding vanuit hulpverleningsinstanties.</p>
+                </div>
+                <div class="audio-card">
+                    <strong>Meldster (Nr. 10)</strong>
+                    <p style="font-size:0.85em;">Ze eist dat je nu per direct actie onderneemt. Ze verwijt dat jullie niks doen en jullie allemaal hetzelfde zijn.</p>
+                </div>
+            </div>
+            <div class="section-split">
+                <div>
+                    <h3>1. Rapportage (DAA)</h3>
+                    <textarea placeholder="Noteer je plan en resultaat..."></textarea>
+                    <h3>2. Mutatie (OVT)</h3>
+                    <textarea placeholder="Schrijf de mutatie. Let op zintuiglijke waarnemingen..."></textarea>
+                </div>
+                <div style="background:#fffdf5; padding:15px; border:1px solid #ddd;">
+                    <h3>Beoordeling</h3>
+                    <p>Selecteer een collega om feedback te geven...</p>
+                </div>
+            </div>
+        </body>
+        </html>'></iframe>
+    </div>
+
+    <div id="screen3" class="screen">
+        <iframe src="https://learningapps.org/watch?v=pjes6i9nk23"></iframe>
+    </div>
+
+    <div id="screen4" class="screen">
+        <div class="instructie-blok">
+            <h2 style="color:#003082; margin-top:0;">Instructie: Zinsontleding</h2>
+            <p>In een proces-verbaal is het essentieel dat de zinsbouw correct is om verwarring te voorkomen. Hier zijn de kernonderdelen:</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <ul style="line-height: 1.8;">
+                    <li><strong>Persoonsvorm:</strong> Wat doet het onderwerp? (vond, zag, hoorde)</li>
+                    <li><strong>Onderwerp:</strong> Wie of wat voert de handeling uit?</li>
+                    <li><strong>Gezegde:</strong> Alle werkwoorden in de zin.</li>
+                </ul>
+                <ul style="line-height: 1.8;">
+                    <li><strong>Lijdend voorwerp:</strong> Wie of wat ondergaat de handeling?</li>
+                    <li><strong>Meewerkend voorwerp:</strong> Voor wie is de handeling bedoeld?</li>
+                    <li><strong>Bijwoordelijke bepaling:</strong> Waar, wanneer of hoe gebeurt het?</li>
+                </ul>
+            </div>
+            <p><em>Voorbeeld: "De agent (Onderwerp) overhandigde (PV) de bon (Lijdend Voorwerp) aan de automobilist (Meewerkend Voorwerp) op de A1 (Bijw. Bepaling)."</em></p>
+        </div>
+
+        <div class="game-container">
+            <h3 style="color:#003082;">Unit Training: De Ontleding Challenge</h3>
+            <p>Identificeer het <strong>onderstreepte</strong> zinsdeel in de 25 politie-zinnen.</p>
+            <div id="game-area">
+                <div id="score-display" style="font-weight:bold; color:#d32f2f;">Vraag: 1/25 | Score: 0</div>
+                <div class="sentence-box" id="sentence">Laden...</div>
+                <div class="options-grid" id="options"></div>
+            </div>
+            <div id="leaderboard" class="leaderboard">
+                <strong>Live Unit Leaderboard:</strong>
+                <div id="lb-entries"><em>Nog geen scores geregistreerd.</em></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen5" class="screen">
+        <div class="instructie-blok" style="max-height: 70vh; overflow-y: auto;">
+            <ul>
+                <li><strong>Dagvaarding</strong> - <em>Een officiële schriftelijke oproep om voor de rechter te verschijnen.</em></li>
+                <li><strong>Vervolging</strong> - <em>Het juridische proces waarbij iemand beschuldigd van een misdrijf voor de rechter wordt gebracht.</em></li>
+                <li><strong>Tenlastelegging</strong> - <em>De formele beschrijving van het misdrijf waarvan iemand verdacht wordt.</em></li>
+                <li><strong>Requisitoir</strong> - <em>Het betoog van de officier van justitie waarin de strafeis wordt geformuleerd.</em></li>
+                <li><strong>Pleidooi</strong> - <em>De verdediging van de verdachte door de advocaat voor de rechter.</em></li>
+                <li><strong>Vonnis</strong> - <em>De formele uitspraak van de rechter aan het einde van een rechtszaak.</em></li>
+                <li><strong>Gerechtshof</strong> - <em>Een hogere rechtbank die oordeelt over beroepen tegen uitspraken van de rechtbank.</em></li>
+                <li><strong>Hoge Raad</strong> - <em>De hoogste rechterlijke instantie in Nederland.</em></li>
+                <li><strong>Jurisprudentie</strong> - <em>Het geheel van rechterlijke uitspraken die als leidraad dienen voor toekomzijde rechtszaken.</em></li>
+                <li><strong>Detentie</strong> - <em>De opsluiting van iemand in een gevangenis of huis van bewaring.</em></li>
+                <li><strong>Reclassering</strong> - <em>De begeleiding van (ex-)gedetineerden om herhaling van strafbaar gedrag te voorkomen.</em></li>
+                <li><strong>Probatie</strong> - <em>Een voorwaardelijke straf waarbij iemand onder toezicht van de reclassering staat.</em></li>
+                <li><strong>Delict</strong> - <em>Een strafbaar feit.</em></li>
+                <li><strong>Misdrijf</strong> - <em>Een ernstig strafbaar feit.</em></li>
+                <li><strong>Overtreding</strong> - <em>Een minder ernstig strafbaar feit.</em></li>
+                <li><strong>Seponeren</strong> - <em>Het besluit van het Openbaar Ministerie om een zaak niet verder te vervolgen.</em></li>
+                <li><strong>Transactie</strong> - <em>Een schikking waarbij de verdachte een boete betaalt in plaats van te worden vervolgd.</em></li>
+                <li><strong>Getuige-deskundige</strong> - <em>Iemand met specifieke kennis die in een rechtszaak een verklaring aflegt.</em></li>
+                <li><strong>Bewijsmateriaal</strong> - <em>Alle objecten, documenten of verklaringen die in een rechtszaak worden gebruikt om iets te bewijzen.</em></li>
+                <li><strong>Rechtsbijstand</strong> - <em>Juridische hulp die wordt verleend aan mensen die dit niet zelf kunnen betalen.</em></li>
+                <li><strong>Verjaring</strong> - <em>Het na een bepaalde tijd niet meer strafrechtelijk kunnen vervolgen van een misdrijf.</em></li>
+                <li><strong>Extraditie</strong> - <em>De overlevering van een verdachte aan een ander land voor strafvervolging.</em></li>
+                <li><strong>Grondrechten</strong> - <em>Fundamentele rechten van burgers die in de grondwet zijn vastgelegd.</em></li>
+                <li><strong>Legaliseren</strong> - <em>Het wettelijk toelaatbaar maken van iets dat voorheen verboden was.</em></li>
+                <li><strong>Sanctie</strong> - <em>Een straf of maatregel die wordt opgelegd bij een overtreding van de wet.</em></li>
+            </ul>
+        </div>
+        <div style="text-align: center;">
+            <iframe frameborder="0" height="400" src="https://www.classtools.net/widg//202504_W3KKG8" width="570"></iframe>
+            <p><a href="https://www.classtools.net/arcade//202504_W3KKG8" target="_blank">View Fullscreen at ClassTools.net</a></p>
+        </div>
+    </div>
+</main>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, ref, update, onValue, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+
+    const firebaseConfig = { apiKey: "AIzaSyA3_rzoZOWytlyAbYKKe_WuFlD8z2WvbX4", authDomain: "aangifteq2les1.firebaseapp.com", databaseURL: "https://aangifteq2les1-default-rtdb.europe-west1.firebasedatabase.app", projectId: "aangifteq2les1" };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // GAME DATA (25 Politie zinnen)
+    const questions = [
+        { q: "<u>De verdachte</u> vluchtte via de achterdeur.", a: "Onderwerp" },
+        { q: "De agent schreef <u>een bekeuring</u>.", a: "Lijdend voorwerp" },
+        { q: "Wij zagen hem <u>op de Dam</u> staan.", a: "Bijwoordelijke bepaling" },
+        { q: "De getuige gaf <u>aan de recherche</u> een verklaring.", a: "Meewerkend voorwerp" },
+        { q: "De camera <u>registreerde</u> de inbraak.", a: "Persoonsvorm" },
+        { q: "<u>Het slachtoffer</u> belde direct 112.", a: "Onderwerp" },
+        { q: "Ik heb <u>de getuige</u> nog niet gesproken.", a: "Lijdend voorwerp" },
+        { q: "De verdachte heeft <u>gisteren</u> bekend.", a: "Bijwoordelijke bepaling" },
+        { q: "De officier <u>heeft</u> de eis <u>geformuleerd</u>.", a: "Gezegde" },
+        { q: "Men gaf <u>de agent</u> een compliment.", a: "Meewerkend voorwerp" },
+        { q: "<u>In de kelder</u> werd het wapen gevonden.", a: "Bijwoordelijke bepaling" },
+        { q: "De man <u>ontkende</u> de diefstal.", a: "Persoonsvorm" },
+        { q: "<u>Vier getuigen</u> zagen het ongeluk.", a: "Onderwerp" },
+        { q: "Zij toonde <u>haar legitimatiebewijs</u>.", a: "Lijdend voorwerp" },
+        { q: "De advocaat stelde <u>de verdachte</u> een vraag.", a: "Meewerkend voorwerp" },
+        { q: "Het onderzoek <u>is</u> onlangs <u>gestart</u>.", a: "Gezegde" },
+        { q: "De hond <u>waakte</u> bij de ingang.", a: "Persoonsvorm" },
+        { q: "De meldkamer stuurde <u>een patrouille</u> naar de plek.", a: "Lijdend voorwerp" },
+        { q: "Hij reed <u>met hoge snelheid</u> door de straat.", a: "Bijwoordelijke bepaling" },
+        { q: "<u>De rechter</u> wees de eis af.", a: "Onderwerp" },
+        { q: "Wie heeft <u>het proces-verbaal</u> getekend?", a: "Lijdend voorwerp" },
+        { q: "De wijkagent bracht <u>de buurtbewoners</u> op de hoogte.", a: "Lijdend voorwerp" },
+        { q: "De technische recherche <u>onderzoekt</u> de sporen.", a: "Persoonsvorm" },
+        { q: "U moet <u>aan ons</u> de waarheid vertellen.", a: "Meewerkend voorwerp" },
+        { q: "<u>Binnenkort</u> volgt de uitspraak.", a: "Bijwoordelijke bepaling" }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    window.showScreen = (nr) => {
+        if(nr === 2 && !document.getElementById('main_naam').value) return alert("Eerst inloggen a.u.b.");
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + nr).classList.add('active');
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.querySelectorAll('.nav-item')[nr-1].classList.add('active');
+        if(nr === 4) initGame();
+        if(nr === 4) syncLeaderboard();
+    };
+
+    function initGame() {
+        if(currentIdx >= questions.length) {
+            document.getElementById('game-area').innerHTML = `<h4>Training Voltooid!</h4><p>Jouw eindscore: ${score}/25</p>`;
+            saveScore();
+            return;
+        }
+        const q = questions[currentIdx];
+        document.getElementById('score-display').innerText = `Vraag: ${currentIdx + 1}/25 | Score: ${score}`;
+        document.getElementById('sentence').innerHTML = q.q;
+        const opts = ["Onderwerp", "Persoonsvorm", "Gezegde", "Lijdend voorwerp", "Meewerkend voorwerp", "Bijwoordelijke bepaling"];
+        const container = document.getElementById('options');
+        container.innerHTML = "";
+        opts.forEach(o => {
+            let b = document.createElement('button');
+            b.className = 'btn-opt';
+            b.innerText = o;
+            b.onclick = () => checkAns(o);
+            container.appendChild(b);
+        });
+    }
+
+    function checkAns(ans) {
+        if(ans === questions[currentIdx].a) score++;
+        currentIdx++;
+        initGame();
+    }
+
+    function saveScore() {
+        const n = document.getElementById('main_naam').value;
+        const k = document.getElementById('main_klas').value;
+        set(ref(db, `leaderboard/${k}/${n}`), { score: score });
+    }
+
+    function syncLeaderboard() {
+        const k = document.getElementById('main_klas').value;
+        onValue(ref(db, `leaderboard/${k}`), (s) => {
+            const data = s.val();
+            let html = "";
+            for(let name in data) html += `<div><strong>${name}:</strong> ${data[name].score} pnt</div>`;
+            document.getElementById('lb-entries').innerHTML = html || "Nog geen scores.";
+        });
+    }
+</script>
+
+</body>
+</html>
